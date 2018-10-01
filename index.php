@@ -7,7 +7,7 @@ libxml_use_internal_errors(true);
 $feed_url = "https://nachrichtenfeeds.br.de/rdf/boards/QXAPkQJ";
 $content = file_get_contents($feed_url);
 $content = preg_replace('/&(?!;{6})/', '&amp;', $content);
-$content = preg_replace('dc:date', 'dcdate', $content);
+$content = preg_replace('/dc:date/', 'dcdate', $content);
 $xml = simplexml_load_string($content);
 
 if ($xml === false) {
@@ -21,7 +21,7 @@ if ($xml === false) {
 // TODO: Add dc:type and image and mp:topline
 // TODO: Extra Page with Images + Text (parse Link)
 
-//TODO: bootstrap.php (bootstrap.css via cdn!) with cards as a design
+//TODO: ?type=list|cards
 
 ?>
 <html>
