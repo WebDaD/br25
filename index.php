@@ -17,6 +17,7 @@ $content = preg_replace('/dc:date/', 'dcdate', $content);
 $content = preg_replace('/mp:image/', 'mpimage', $content);
 $content = preg_replace('/mp:data/', 'mpdata', $content);
 $content = preg_replace('/mp:alt/', 'mpalt', $content);
+$content = preg_replace('/mp:topline/', 'mptopline', $content);
 $xml = simplexml_load_string($content);
 
 if ($xml === false) {
@@ -61,10 +62,14 @@ if ($xml === false) {
       <div class="card-columns">
         <?php foreach($xml->item as $entry): ?>
         <div class="card">
+          <a href="<?php echo $entry->link;?>" target="_blank">
           <img class="card-img-top" src="<?php echo $entry->mpimage[0]->mpdata;?>" alt="<?php echo $entry->mpimage[0]->mpalt;?>">
+          </a>
           <div class="card-body">
             <h5 class="card-title">
+            <a href="<?php echo $entry->link;?>" target="_blank">
               <?php echo $entry->title;?>
+              </a>
             </h5>
             <p class="card-text">
               <?php echo $entry->description;?>
@@ -74,6 +79,9 @@ if ($xml === false) {
             <a class="card-link" href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
               Weiterlesen ...
             </a>
+          </div>
+          <div class="card-body">
+          <span class="badge badge-info"><?php echo $entry->mptopline;?></span>
           </div>
           <div class="card-footer">
             <small class="text-muted">
