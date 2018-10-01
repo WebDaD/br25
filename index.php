@@ -5,8 +5,14 @@ error_reporting(E_ALL);
 
 $feed_url = "https://nachrichtenfeeds.br.de/rdf/boards/QXAPkQJ";
 $content = file_get_contents($feed_url);
-$xml = new SimpleXmlElement($content);
+$xml = new SimpleXmlElement($content, LIBXML_PARSEHUGE);
 
+if ($xml === false) {
+  echo "Laden des XML fehlgeschlagen\n";
+  foreach(libxml_get_errors() as $error) {
+      echo "\t", $error->message;
+  }
+}
 // TODO: Add Info from channel into page
 // TODO: Add dc:type and image and mp:topline
 // TODO: Extra Page with Images + Text (parse Link)
@@ -26,7 +32,7 @@ $xml = new SimpleXmlElement($content);
   <div class="container">
     <h1>BR 25</h1>
     <pre>
-      <?php echo $xml; ?>
+      <?php echo $content; ?>
     </pre>
     <ul>
       <?php foreach($xml->channel->item as $entry): ?>
