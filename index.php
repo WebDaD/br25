@@ -4,6 +4,7 @@ $type = (isset($_GET["type"])) ? $_GET["type"] : "list";
 if($type != "list" && $type != "cards") {
   die("Type ".$type." not known");
 }
+$top = (isset($_GET["top"])) ? $_GET["top"] : "all";
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -28,15 +29,15 @@ if ($xml === false) {
   die();
 }
 // TODO: Add Info from channel into page
-// TODO: CARDS: Add dc:type and image and mp:topline
 
 ?>
   <html>
 
   <head>
     <title>BR 25</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+
   </head>
 
   <body>
@@ -45,51 +46,65 @@ if ($xml === false) {
       <?php if($type == "list"): ?>
       <ul>
         <?php foreach($xml->item as $entry): ?>
-        <li>
-          <a href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
-            [
-            <?php echo date_format(date_create($entry->dcdate), "d.m.Y H:i");?> ]
-            <?php echo $entry->title;?>
-          </a>
-          <br />
-          <p>
-            <?php echo $entry->description;?>
-          </p>
-        </li>
-        <?php endforeach;?>
+        <?php
+          if ($top != 'all' && $top != $entry->mptopline) {
+            continue;
+          }
+        ?>
+          <li>
+            <a href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
+              [
+              <?php echo date_format(date_create($entry->dcdate), "d.m.Y H:i");?> ]
+              <?php echo $entry->title;?>
+            </a>
+            <br />
+            <p>
+              <?php echo $entry->description;?>
+            </p>
+          </li>
+          <?php endforeach;?>
       </ul>
       <?php else: ?>
       <div class="card-columns">
         <?php foreach($xml->item as $entry): ?>
-        <div class="card">
-          <a href="<?php echo $entry->link;?>" target="_blank">
-          <img class="card-img-top" src="<?php echo $entry->mpimage[0]->mpdata;?>" alt="<?php echo $entry->mpimage[0]->mpalt;?>">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">
+        <?php
+          if ($top != 'all' && $top != $entry->mptopline) {
+            continue;
+          }
+        ?>
+          <div class="card">
             <a href="<?php echo $entry->link;?>" target="_blank">
-              <?php echo $entry->title;?>
-              </a>
-            </h5>
-            <p class="card-text">
-              <?php echo $entry->description;?>
-            </p>
-          </div>
-          <div class="card-body">
-            <a class="card-link" href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
-              Weiterlesen ...
+              <img class="card-img-top" src="<?php echo $entry->mpimage[0]->mpdata;?>" alt="<?php echo $entry->mpimage[0]->mpalt;?>">
             </a>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="<?php echo $entry->link;?>" target="_blank">
+                  <?php echo $entry->title;?>
+                </a>
+              </h5>
+              <p class="card-text">
+                <?php echo $entry->description;?>
+              </p>
+            </div>
+            <div class="card-body">
+              <a class="card-link" href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
+                Weiterlesen ...
+              </a>
+            </div>
+            <div class="card-body">
+              <a href="?type=cards&top=<?php echo $entry->mptopline;?>" target="_blank">
+                <span class="badge badge-info">
+                  <?php echo $entry->mptopline;?>
+                </span>
+              </a>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">
+                <?php echo date_format(date_create($entry->dcdate), "d.m.Y H:i");?>
+              </small>
+            </div>
           </div>
-          <div class="card-body">
-          <span class="badge badge-info"><?php echo $entry->mptopline;?></span>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">
-              <?php echo date_format(date_create($entry->dcdate), "d.m.Y H:i");?>
-            </small>
-          </div>
-        </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
       </div>
       <?php endif; ?>
       <hr />
