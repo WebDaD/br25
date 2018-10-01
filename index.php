@@ -7,6 +7,7 @@ libxml_use_internal_errors(true);
 $feed_url = "https://nachrichtenfeeds.br.de/rdf/boards/QXAPkQJ";
 $content = file_get_contents($feed_url);
 $content = preg_replace('/&(?!;{6})/', '&amp;', $content);
+$content = preg_replace('/dc:date/', 'dcdate;', $content);
 $xml = simplexml_load_string($content);
 
 if ($xml === false) {
@@ -40,7 +41,7 @@ if ($xml === false) {
       <li>
         <a href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
           [
-          <?php echo $entry["dc:date"];?>
+          <?php echo $entry->dcdate;?>
           ]
           <?php echo $entry->title;?>
         </a>
