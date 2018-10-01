@@ -47,7 +47,7 @@ if ($xml === false) {
         <li>
           <a href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
             [
-            <?php echo $entry->dcdate;?> ]
+            <?php echo date_format(date_create($entry->dcdate), "d.m.y hh:ii");?> ]
             <?php echo $entry->title;?>
           </a>
           <br />
@@ -72,7 +72,7 @@ if ($xml === false) {
             </a>
           </div>
           <div class="card-footer">
-            <small class="text-muted"><?php echo $entry->dcdate;?></small>
+            <small class="text-muted"><?php echo date_format(date_create($entry->dcdate), "d.m.y hh:ii");?></small>
           </div>
         </div>
         <?php endforeach; ?>
