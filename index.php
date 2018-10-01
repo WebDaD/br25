@@ -92,7 +92,7 @@ if ($xml === false) {
               </a>
             </div>
             <div class="card-body">
-              <a href="?type=cards&top=<?php echo $entry->mptopline;?>" target="_blank">
+              <a href="?type=cards&top=<?php echo $entry->mptopline;?>">
                 <span class="badge badge-info">
                   <?php echo $entry->mptopline;?>
                 </span>
