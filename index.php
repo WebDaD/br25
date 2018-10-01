@@ -61,7 +61,7 @@ if ($xml === false) {
       <div class="card-columns">
         <?php foreach($xml->item as $entry): ?>
         <div class="card">
-          <img class="card-img-top" src="<?php echo $entry->mpimage[0]->mpsource;?>" alt=<?php echo $entry->mpimage[0]->mpalt;?>">
+          <img class="card-img-top" src="<?php echo $entry->mpimage[0]->mpsource;?>" alt="<?php echo $entry->mpimage[0]->mpalt;?>">
           <div class="card-body">
             <h5 class="card-title"><?php echo $entry->title;?></h5>
             <p class="card-text"><?php echo $entry->description;?></p>
