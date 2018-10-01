@@ -15,6 +15,10 @@ if ($xml === false) {
       echo "\t", $error->message;
   }
   die();
+} else {
+  foreach(libxml_get_errors() as $error) {
+    echo "\t", $error->message;
+}
 }
 // TODO: Add Info from channel into page
 // TODO: Add dc:type and image and mp:topline
