@@ -25,6 +25,9 @@ $xml = new SimpleXmlElement($content);
 <body>
   <div class="container">
     <h1>BR 25</h1>
+    <pre>
+      <?php echo $xml; ?>
+    </pre>
     <ul>
       <?php foreach($xml->channel->item as $entry): ?>
       <li>
