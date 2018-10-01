@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 $feed_url = "https://nachrichtenfeeds.br.de/rdf/boards/QXAPkQJ";
 $content = file_get_contents($feed_url);
-$xml = new SimpleXmlElement($content, LIBXML_PARSEHUGE);
+$xml = simplexml_load_string($content);
 
 if ($xml === false) {
   echo "Laden des XML fehlgeschlagen\n";
