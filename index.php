@@ -16,10 +16,11 @@ $xml = new SimpleXmlElement($content);
 ?>
 <html>
   <head>
-    <title>BR 24 Lite</title>
+    <title>BR 25</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
-    <h1>BR 24 Lite</h1>
+    <h1>BR 25</h1>
     <ul>
       <?php foreach($xml->channel->item as $entry): ?>
         <li>
