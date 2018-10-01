@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $feed_url = "https://nachrichtenfeeds.br.de/rdf/boards/QXAPkQJ";
 $content = file_get_contents($feed_url);
 $xml = new SimpleXmlElement($content);
