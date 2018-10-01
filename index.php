@@ -34,11 +34,8 @@ if ($xml === false) {
 <body>
   <div class="container">
     <h1>BR 25</h1>
-    <pre>
-      <?php var_dump($xml); ?>
-    </pre>
     <ul>
-      <?php foreach($xml->channel->item as $entry): ?>
+      <?php foreach($xml->item as $entry): ?>
       <li>
         <a href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
           [
