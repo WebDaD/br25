@@ -35,7 +35,7 @@ if ($xml === false) {
   <div class="container">
     <h1>BR 25</h1>
     <pre>
-      <?php echo $xml[0]; ?>
+      <?php var_dump($xml); ?>
     </pre>
     <ul>
       <?php foreach($xml->channel->item as $entry): ?>
