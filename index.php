@@ -15,7 +15,7 @@ $content = file_get_contents($feed_url);
 $content = preg_replace('/&(?!;{6})/', '&amp;', $content);
 $content = preg_replace('/dc:date/', 'dcdate', $content);
 $content = preg_replace('/mp:image/', 'mpimage', $content);
-$content = preg_replace('/mp:source/', 'mpsource', $content);
+$content = preg_replace('/mp:data/', 'mpdata', $content);
 $content = preg_replace('/mp:alt/', 'mpalt', $content);
 $xml = simplexml_load_string($content);
 
