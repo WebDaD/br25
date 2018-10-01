@@ -6,6 +6,7 @@ libxml_use_internal_errors(true);
 
 $feed_url = "https://nachrichtenfeeds.br.de/rdf/boards/QXAPkQJ";
 $content = file_get_contents($feed_url);
+$content = preg_replace('/&[^; ]{0,6}.?/e', "((substr('\\0',-1) == ';') ? '\\0' : '&amp;'.substr('\\0',1))", $content);
 $xml = simplexml_load_string($content);
 
 if ($xml === false) {
