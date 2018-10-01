@@ -36,10 +36,12 @@ if ($xml === false) {
     <h1>BR 25</h1>
     <ul>
       <?php foreach($xml->item as $entry): ?>
+      <pre><?php vardump($entry);?></pre>
       <li>
         <a href='<?php echo $entry->link;?>' title='<?php echo $entry->title;?>' target="_blank">
           [
-          <?php echo $entry["dc:date"];?>]
+          <?php echo $entry["dc:date"];?>
+          ]
           <?php echo $entry->title;?>
         </a>
         <br />
