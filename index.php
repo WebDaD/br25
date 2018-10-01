@@ -12,6 +12,7 @@ if ($xml === false) {
   foreach(libxml_get_errors() as $error) {
       echo "\t", $error->message;
   }
+  die();
 }
 // TODO: Add Info from channel into page
 // TODO: Add dc:type and image and mp:topline
@@ -31,9 +32,6 @@ if ($xml === false) {
 <body>
   <div class="container">
     <h1>BR 25</h1>
-    <pre>
-      <?php echo $content; ?>
-    </pre>
     <ul>
       <?php foreach($xml->channel->item as $entry): ?>
       <li>
