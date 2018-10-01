@@ -1,7 +1,7 @@
 <?php
 
 $type = (isset($_GET["type"])) ? $_GET["type"] : "list";
-if($type !== "list" || $type !== "cards") {
+if($type != "list" && $type != "cards") {
   die("Type ".$type." not known");
 }
 
@@ -41,7 +41,7 @@ if ($xml === false) {
   <body>
     <div class="container">
       <h1>BR 25</h1>
-      <?php if($type === "list"): ?>
+      <?php if($type == "list"): ?>
       <ul>
         <?php foreach($xml->item as $entry): ?>
         <li>
